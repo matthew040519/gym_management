@@ -101,6 +101,7 @@
                               <tr>
                                   <th>Member</th>
                                   <th>Package</th>
+                                  <th>Instructor</th>
                                   <th style="text-align: left;">Amount</th>
                                   <th>Duration</th>
                                   <th>Mode of Payment</th>
@@ -109,21 +110,24 @@
                           </thead>
                           <tbody>
                               <?php
-                              $query = mysqli_query($con, "SELECT member_package.id as member_package_id, package.type, package.package_name, member.fullname, member_package.amount, package.duration, member_package.MOP FROM member_package 
+                              $query = mysqli_query($con, "SELECT member_package.id as member_package_id, instructor.fullname as instructor_name, package.type, package.package_name, member.fullname, member_package.amount, package.duration, member_package.MOP FROM member_package 
                               INNER JOIN member ON member.id=member_package.member_id
-                              INNER JOIN package ON package.id=member_package.package_id 
+                              INNER JOIN package ON package.id=member_package.package_id
+                              INNER JOIN instructor ON instructor.id=member_package.instructor_id
                               WHERE status = 0");
                               while ($row = mysqli_fetch_array($query)) {
                               ?>
                               <tr>
                                   <td><?php echo $row['fullname']; ?></td>
                                   <td><?php echo $row['package_name']; ?></td>
+                                  <td><?php echo $row['instructor_name']; ?></td>
                                   <td style="text-align: left;"><?php echo number_format($row['amount'], 2); ?></td>
                                   <td><?php echo $row['duration']; ?></td>
                                   <td><?php echo $row['MOP']; ?></td>
                                   <td style="text-align: center;"><a href="" data-bs-toggle="modal"
-                            data-bs-target="#modalCenter<?php echo $row['member_package_id']; ?>" class="btn btn-success btn-sm">Accept</a> || <a href="" data-bs-toggle="modal"
-                            data-bs-target="#modalCenterdecline<?php echo $row['member_package_id']; ?>" class="btn btn-danger btn-sm">Decline</a></td>
+                            data-bs-target="#modalCenter<?php echo $row['member_package_id']; ?>" class="btn btn-success btn-sm">Accept</a> <?php if($row['MOP'] != 'Paypal') {  ?> || <a href="" data-bs-toggle="modal"
+                            data-bs-target="#modalCenterdecline<?php echo $row['member_package_id']; ?>" class="btn btn-danger btn-sm">Decline</a> <?php } ?>
+                          </td>
                               </tr>
                               <?php include('modals/accept_transaction.php');
                             include('modals/decline_transaction.php'); } ?>

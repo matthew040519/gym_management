@@ -245,6 +245,9 @@ $countPM = mysqli_num_rows($countSlotsPM) == 0 ? 3 : 3 - $rowCountsPM['count'];
                         location.replace('packages.php');
                         </script>";
                     }
+                    else {
+                      echo "<script>alert('Error!')</script>";
+                    }
 
                 }
             

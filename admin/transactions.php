@@ -131,6 +131,7 @@
                               <tr>
                                   <th>Member</th>
                                   <th>Package</th>
+                                  <th>Instructor</th>
                                   <th style="text-align: left;">Amount</th>
                                   <th>Duration</th>
                                   <th>Mode of Payment</th>
@@ -149,15 +150,17 @@
                                   $dto = $_GET['dto'];
                                   $Sql .= "And member_package.package_id = '$package' AND tdate BETWEEN '$dfrom' AND '$dto'";
                               }
-                              $query = mysqli_query($con, "SELECT member_package.id as member_package_id, member_package.tdate, package.type, package.package_name, member.fullname, member_package.amount, package.duration, member_package.MOP, member_package.status,
+                              $query = mysqli_query($con, "SELECT member_package.id as member_package_id, instructor.fullname as instructor_name, member_package.tdate, package.type, package.package_name, member.fullname, member_package.amount, package.duration, member_package.MOP, member_package.status,
                               (SELECT CASE WHEN member_package.status = 0 THEN 'Pending' WHEN member_package.status = 1 THEN 'Accepted' ELSE 'Declined' END) as trans_status FROM member_package 
                               INNER JOIN member ON member.id=member_package.member_id
-                              INNER JOIN package ON package.id=member_package.package_id WHERE 1=1 $Sql");
+                              INNER JOIN package ON package.id=member_package.package_id
+                              INNER JOIN instructor ON instructor.id=member_package.instructor_id  WHERE 1=1 $Sql");
                               while ($row = mysqli_fetch_array($query)) {
                               ?>
                               <tr>
                                   <td><?php echo $row['fullname']; ?></td>
                                   <td><?php echo $row['package_name']; ?></td>
+                                  <td><?php echo $row['instructor_name']; ?></td>
                                   <td style="text-align: left;"><?php echo number_format($row['amount'], 2); ?></td>
                                   <td><?php echo $row['duration']; ?></td>
                                   <td><?php echo $row['MOP']; ?></td>
