@@ -1,235 +1,476 @@
-<?php
-
-        include('include/connection.php');
-
-        if(isset($_POST["submit"]))
-        {
-
-            $username = $_POST['username'];
-            $password = md5($_POST['password']);
-
-            
-
-            $user = mysqli_query($con, "SELECT * FROM users WHERE username = '$username' and active = 1");
-            $rowuser = mysqli_fetch_array($user);
-
-            $checkusername = mysqli_num_rows($user);
-
-            if($checkusername > 0)
-            {
-              if ($password == $rowuser['password']) {
-                
-                session_start();
-                session_regenerate_id();
-
-                $_SESSION['loggedin'] = TRUE;
-                $_SESSION['role'] = $rowuser['role'];
-                $_SESSION['username'] = $rowuser['username'];
-                $_SESSION['id'] = $rowuser['id'];
-
-                // echo $_SESSION['role'];
-
-                if($rowuser['role'] == 1)
-                {
-                    header('location: admin/index.php');
-                }
-                else if($rowuser['role'] == 2) {
-                    $id = $_SESSION['id'];
-                    $client = mysqli_query($con, "SELECT * FROM instructor WHERE user_id = '$id'");
-                    $res = mysqli_fetch_array($client);
-                    $_SESSION['fullname'] = $res['client_name'];
-                    $_SESSION['instructor_id'] = $res['id'];
-                    header('location: instructor/index.php');
-                }
-                else if($rowuser['role'] == 3) {
-                  $id = $_SESSION['id'];
-                  $client = mysqli_query($con, "SELECT * FROM member WHERE user_id = '$id'");
-                  $res = mysqli_fetch_array($client);
-                  $_SESSION['fullname'] = $res['fullname'];
-                  $_SESSION['member_id'] = $res['id'];
-                  header('location: member/index.php');
-              }
-                
-
-              } else {
-                echo "<script>alert('Invalid Password.')</script>";
-              }
-            } else {
-                echo "<script>alert('Invalid Username or Password.')</script>";
-            }
-            
-
-        }
-
-?>
 <!DOCTYPE html>
+<html lang="en">
 
-<!-- =========================================================
-* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
-==============================================================
-
-* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
-* Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
-
-=========================================================
- -->
-<!-- beautify ignore:start -->
-<html
-  lang="en"
-  class="light-style customizer-hide"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="assets/"
-  data-template="vertical-menu-template-free"
->
   <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-    />
 
-    <title>Gym Management</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 
-    <meta name="description" content="" />
+    <title>LG Extreme Gym</title>
+<!--
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+TemplateMo 548 Training Studio
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
+https://templatemo.com/tm-548-training-studio
 
-    <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="assets/vendor/fonts/boxicons.css" />
+-->
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="front_page/assets/css/bootstrap.min.css">
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="assets/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="front_page/assets/css/font-awesome.css">
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="front_page/assets/css/templatemo-training-studio.css">
 
-    <!-- Page CSS -->
-    <!-- Page -->
-    <link rel="stylesheet" href="assets/vendor/css/pages/page-auth.css" />
-    <!-- Helpers -->
-    <script src="assets/vendor/js/helpers.js"></script>
-
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/js/config.js"></script>
-  </head>
-
-  <body>
-    <!-- Content -->
-
-    <div class="container-xxl">
-      <div class="authentication-wrapper authentication-basic container-p-y">
-        <div class="authentication-inner">
-          <!-- Register -->
-          <div class="card">
-            <div class="card-body">
-              <!-- Logo -->
-              <div class="app-brand justify-content-center">
-                <a href="index.php" class="app-brand-link gap-2">
-                  <span class="app-brand-logo demo">
-                    <img src="include/gym_logo.jpg" style="height: 150px;" alt="">
-                  </span>
-                  <span class="app-brand-text demo text-body fw-bolder"></span>
-                </a>
-              </div>
-              <!-- /Logo -->
-              <h4 class="mb-2">Welcome to Gym System! 👋</h4>
-              <p class="mb-4">Please sign-in to your account and start the adventure</p>
-
-              <form id="formAuthentication" class="mb-3" method="POST">
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email or Username</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="email"
-                    name="username"
-                    placeholder="Enter your username"
-                    autofocus
-                  />
-                </div>
-                <div class="mb-3 form-password-toggle">
-                  <!-- <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">Password</label>
-                    <a href="auth-forgot-password-basic.html">
-                      <small>Forgot Password?</small>
-                    </a>
-                  </div> -->
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password"
-                    />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <input type="submit" class="btn btn-primary d-grid w-100" name="submit" value="Login">
-                </div>
-              </form>
-
-              <p class="text-center">
-                <span>New on our platform?</span>
-                <a href="register.php">
-                  <span>Create an account</span>
-                </a>
-              </p>
-            </div>
-          </div>
-          <!-- /Register -->
+    </head>
+    
+    <body>
+    
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+      <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </div>
     </div>
-
+    <!-- ***** Preloader End ***** -->
     
+    
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.php" class="logo">LG Extreme<em> Gym</em></a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                            <li class="scroll-to-section"><a href="#features">About</a></li>
+                            <li class="scroll-to-section"><a href="#our-classes">Classes</a></li>
+                            <li class="scroll-to-section"><a href="#schedule">Schedules</a></li>
+                            <li class="scroll-to-section"><a href="#contact-us">Contact</a></li> 
+                            <li class="main-button"><a href="login.php">Sign Up</a></li>
+                        </ul>        
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
 
-    <!-- / Content -->
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner" id="top">
+        <video autoplay muted loop id="bg-video">
+            <source src="front_page/assets/images/gym-video.mp4" type="video/mp4" />
+        </video>
 
-    <!-- <div class="buy-now">
-      <a
-        href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/"
-        target="_blank"
-        class="btn btn-danger btn-buy-now"
-        >Upgrade to Pro</a
-      >
-    </div> -->
+        <div class="video-overlay header-text">
+            <div class="caption">
+                <h6>work harder, get stronger</h6>
+                <h2>easy with our <em>gym</em></h2>
+                <div class="main-button scroll-to-section">
+                    <a href="#features">Become a member</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
 
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="assets/vendor/libs/popper/popper.js"></script>
-    <script src="assets/vendor/js/bootstrap.js"></script>
-    <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <!-- ***** Features Item Start ***** -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="section-heading">
+                        <h2>Choose <em>Program</em></h2>
+                        <img src="front_page/assets/images/line-dec.png" alt="waves">
+                        <p>Training Studio is free CSS template for gyms and fitness centers. You are allowed to use this layout for your business website.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="features-items">
+                        <li class="feature-item">
+                            <div class="left-icon">
+                                <img src="front_page/assets/images/features-first-icon.png" alt="First One">
+                            </div>
+                            <div class="right-content">
+                                <h4>Basic Fitness</h4>
+                                <p>Please do not re-distribute this template ZIP file on any template collection website. This is not allowed.</p>
+                                <a href="#" class="text-button">Discover More</a>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="left-icon">
+                                <img src="front_page/assets/images/features-first-icon.png" alt="second one">
+                            </div>
+                            <div class="right-content">
+                                <h4>New Gym Training</h4>
+                                <p>If you wish to support TemplateMo website via PayPal, please feel free to contact us. We appreciate it a lot.</p>
+                                <a href="#" class="text-button">Discover More</a>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="left-icon">
+                                <img src="front_page/assets/images/features-first-icon.png" alt="third gym training">
+                            </div>
+                            <div class="right-content">
+                                <h4>Basic Muscle Course</h4>
+                                <p>Credit goes to <a rel="nofollow" href="https://www.pexels.com" target="_blank">Pexels website</a> for images and video background used in this HTML template.</p>
+                                <a href="#" class="text-button">Discover More</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="features-items">
+                        <li class="feature-item">
+                            <div class="left-icon">
+                                <img src="front_page/assets/images/features-first-icon.png" alt="fourth muscle">
+                            </div>
+                            <div class="right-content">
+                                <h4>Advanced Muscle Course</h4>
+                                <p>You may want to browse through <a rel="nofollow" href="#" target="_parent">Digital Marketing</a> or <a href="#">Corporate</a> HTML CSS templates on our website.</p>
+                                <a href="#" class="text-button">Discover More</a>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="left-icon">
+                                <img src="front_page/assets/images/features-first-icon.png" alt="training fifth">
+                            </div>
+                            <div class="right-content">
+                                <h4>Yoga Training</h4>
+                                <p>This template is built on Bootstrap v4.3.1 framework. It is easy to adapt the columns and sections.</p>
+                                <a href="#" class="text-button">Discover More</a>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="left-icon">
+                                <img src="front_page/assets/images/features-first-icon.png" alt="gym training">
+                            </div>
+                            <div class="right-content">
+                                <h4>Body Building Course</h4>
+                                <p>Suspendisse fringilla et nisi et mattis. Curabitur sed finibus nisi. Integer nibh sapien, vehicula et auctor.</p>
+                                <a href="#" class="text-button">Discover More</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Features Item End ***** -->
 
-    <script src="assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
+    <!-- ***** Call to Action Start ***** -->
+    <section class="section" id="call-to-action">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="cta-content">
+                        <h2>Don’t <em>think</em>, begin <em>today</em>!</h2>
+                        <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula, sit amet dapibus odio augue eget libero. Morbi tempus mauris a nisi luctus imperdiet.</p>
+                        <div class="main-button scroll-to-section">
+                            <a href="#our-classes">Become a member</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Call to Action End ***** -->
 
-    <!-- Vendors JS -->
+    <!-- ***** Our Classes Start ***** -->
+    <section class="section" id="our-classes">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="section-heading">
+                        <h2>Our <em>Classes</em></h2>
+                        <img src="front_page/assets/images/line-dec.png" alt="">
+                        <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="tabs">
+              <div class="col-lg-4">
+                <ul>
+                  <li><a href='#tabs-1'><img src="assets/images/tabs-first-icon.png" alt="">First Training Class</a></li>
+                  <li><a href='#tabs-2'><img src="assets/images/tabs-first-icon.png" alt="">Second Training Class</a></a></li>
+                  <li><a href='#tabs-3'><img src="assets/images/tabs-first-icon.png" alt="">Third Training Class</a></a></li>
+                  <li><a href='#tabs-4'><img src="assets/images/tabs-first-icon.png" alt="">Fourth Training Class</a></a></li>
+                  <div class="main-rounded-button"><a href="#">View All Schedules</a></div>
+                </ul>
+              </div>
+              <div class="col-lg-8">
+                <section class='tabs-content'>
+                  <article id='tabs-1'>
+                    <img src="front_page/assets/images/training-image-01.jpg" alt="First Class">
+                    <h4>First Training Class</h4>
+                    <p>Phasellus convallis mauris sed elementum vulputate. Donec posuere leo sed dui eleifend hendrerit. Sed suscipit suscipit erat, sed vehicula ligula. Aliquam ut sem fermentum sem tincidunt lacinia gravida aliquam nunc. Morbi quis erat imperdiet, molestie nunc ut, accumsan diam.</p>
+                    <div class="main-button">
+                        <a href="#">View Schedule</a>
+                    </div>
+                  </article>
+                  <article id='tabs-2'>
+                    <img src="front_page/assets/images/training-image-02.jpg" alt="Second Training">
+                    <h4>Second Training Class</h4>
+                    <p>Integer dapibus, est vel dapibus mattis, sem mauris luctus leo, ac pulvinar quam tortor a velit. Praesent ultrices erat ante, in ultricies augue ultricies faucibus. Nam tellus nibh, ullamcorper at mattis non, rhoncus sed massa. Cras quis pulvinar eros. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                    <div class="main-button">
+                        <a href="#">View Schedule</a>
+                    </div>
+                  </article>
+                  <article id='tabs-3'>
+                    <img src="front_page/assets/images/training-image-03.jpg" alt="Third Class">
+                    <h4>Third Training Class</h4>
+                    <p>Fusce laoreet malesuada rhoncus. Donec ultricies diam tortor, id auctor neque posuere sit amet. Aliquam pharetra, augue vel cursus porta, nisi tortor vulputate sapien, id scelerisque felis magna id felis. Proin neque metus, pellentesque pharetra semper vel, accumsan a neque.</p>
+                    <div class="main-button">
+                        <a href="#">View Schedule</a>
+                    </div>
+                  </article>
+                  <article id='tabs-4'>
+                    <img src="front_page/assets/images/training-image-04.jpg" alt="Fourth Training">
+                    <h4>Fourth Training Class</h4>
+                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean ultrices elementum odio ac tempus. Etiam eleifend orci lectus, eget venenatis ipsum commodo et.</p>
+                    <div class="main-button">
+                        <a href="#">View Schedule</a>
+                    </div>
+                  </article>
+                </section>
+              </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Our Classes End ***** -->
+    
+    <section class="section" id="schedule">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="section-heading dark-bg">
+                        <h2>Classes <em>Schedule</em></h2>
+                        <img src="front_page/assets/images/line-dec.png" alt="">
+                        <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="filters">
+                        <ul class="schedule-filter">
+                            <li class="active" data-tsfilter="monday">Monday</li>
+                            <li data-tsfilter="tuesday">Tuesday</li>
+                            <li data-tsfilter="wednesday">Wednesday</li>
+                            <li data-tsfilter="thursday">Thursday</li>
+                            <li data-tsfilter="friday">Friday</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="schedule-table filtering">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="day-time">Fitness Class</td>
+                                    <td class="monday ts-item show" data-tsmeta="monday">10:00AM - 11:30AM</td>
+                                    <td class="tuesday ts-item" data-tsmeta="tuesday">2:00PM - 3:30PM</td>
+                                    <td>William G. Stewart</td>
+                                </tr>
+                                <tr>
+                                    <td class="day-time">Muscle Training</td>
+                                    <td class="friday ts-item" data-tsmeta="friday">10:00AM - 11:30AM</td>
+                                    <td class="thursday friday ts-item" data-tsmeta="thursday" data-tsmeta="friday">2:00PM - 3:30PM</td>
+                                    <td>Paul D. Newman</td>
+                                </tr>
+                                <tr>
+                                    <td class="day-time">Body Building</td>
+                                    <td class="tuesday ts-item" data-tsmeta="tuesday">10:00AM - 11:30AM</td>
+                                    <td class="monday ts-item show" data-tsmeta="monday">2:00PM - 3:30PM</td>
+                                    <td>Boyd C. Harris</td>
+                                </tr>
+                                <tr>
+                                    <td class="day-time">Yoga Training Class</td>
+                                    <td class="wednesday ts-item" data-tsmeta="wednesday">10:00AM - 11:30AM</td>
+                                    <td class="friday ts-item" data-tsmeta="friday">2:00PM - 3:30PM</td>
+                                    <td>Hector T. Daigle</td>
+                                </tr>
+                                <tr>
+                                    <td class="day-time">Advanced Training</td>
+                                    <td class="thursday ts-item" data-tsmeta="thursday">10:00AM - 11:30AM</td>
+                                    <td class="wednesday ts-item" data-tsmeta="wednesday">2:00PM - 3:30PM</td>
+                                    <td>Bret D. Bowers</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <!-- ***** Testimonials Starts ***** -->
+    <section class="section" id="trainers">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="section-heading">
+                        <h2>Expert <em>Trainers</em></h2>
+                        <img src="front_page/assets/images/line-dec.png" alt="">
+                        <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="trainer-item">
+                        <div class="image-thumb">
+                            <img src="front_page/assets/images/first-trainer.jpg" alt="">
+                        </div>
+                        <div class="down-content">
+                            <span>Strength Trainer</span>
+                            <h4>Bret D. Bowers</h4>
+                            <p>Bitters cliche tattooed 8-bit distillery mustache. Keytar succulents gluten-free vegan church-key pour-over seitan flannel.</p>
+                            <ul class="social-icons">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="trainer-item">
+                        <div class="image-thumb">
+                            <img src="front_page/assets/images/second-trainer.jpg" alt="">
+                        </div>
+                        <div class="down-content">
+                            <span>Muscle Trainer</span>
+                            <h4>Hector T. Daigl</h4>
+                            <p>Bitters cliche tattooed 8-bit distillery mustache. Keytar succulents gluten-free vegan church-key pour-over seitan flannel.</p>
+                            <ul class="social-icons">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="trainer-item">
+                        <div class="image-thumb">
+                            <img src="front_page/assets/images/third-trainer.jpg" alt="">
+                        </div>
+                        <div class="down-content">
+                            <span>Power Trainer</span>
+                            <h4>Paul D. Newman</h4>
+                            <p>Bitters cliche tattooed 8-bit distillery mustache. Keytar succulents gluten-free vegan church-key pour-over seitan flannel.</p>
+                            <ul class="social-icons">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Testimonials Ends ***** -->
+    
+    <!-- ***** Contact Us Area Starts ***** -->
+    <section class="section" id="contact-us">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div id="map">
+                      <iframe src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="600px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="contact-form">
+                        <form id="contact" action="" method="post">
+                          <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                              <fieldset>
+                                <input name="name" type="text" id="name" placeholder="Your Name*" required="">
+                              </fieldset>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                              <fieldset>
+                                <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your Email*" required="">
+                              </fieldset>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                              <fieldset>
+                                <input name="subject" type="text" id="subject" placeholder="Subject">
+                              </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                              <fieldset>
+                                <textarea name="message" rows="6" id="message" placeholder="Message" required=""></textarea>
+                              </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                              <fieldset>
+                                <button type="submit" id="form-submit" class="main-button">Send Message</button>
+                              </fieldset>
+                            </div>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Contact Us Area Ends ***** -->
+    
+    <!-- ***** Footer Start ***** -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Gym Management System 2024
+                  
+                </p>
+                    
+                    <!-- You shall support us a little via PayPal to info@templatemo.com -->
+                    
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    <!-- Page JS -->
+    <!-- jQuery -->
+    <script src="front_page/assets/js/jquery-2.1.0.min.js"></script>
 
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Bootstrap -->
+    <script src="front_page/assets/js/popper.js"></script>
+    <script src="front_page/assets/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="front_page/assets/js/scrollreveal.min.js"></script>
+    <script src="front_page/assets/js/waypoints.min.js"></script>
+    <script src="front_page/assets/js/jquery.counterup.min.js"></script>
+    <script src="front_page/assets/js/imgfix.min.js"></script> 
+    <script src="front_page/assets/js/mixitup.js"></script> 
+    <script src="front_page/assets/js/accordions.js"></script>
+    
+    <!-- Global Init -->
+    <script src="front_page/assets/js/custom.js"></script>
+
   </body>
 </html>
