@@ -118,7 +118,7 @@
                         <?php
                         $query = mysqli_query($con, "SELECT member.fullname as member_fullname, instructor.fullname as instructor_fullname, 
                         rates.type, TRANSACTION.payment, TRANSACTION.tdate, 
-                        TRANSACTION.MOP, TRANSACTION.`status` FROM TRANSACTION 
+                        TRANSACTION.MOP, TRANSACTION.status FROM TRANSACTION 
                         INNER JOIN member ON member.id=TRANSACTION.member_id
                         INNER JOIN instructor ON instructor.id=TRANSACTION.instructor_id
                         INNER JOIN rates ON rates.id=TRANSACTION.rates_id");
