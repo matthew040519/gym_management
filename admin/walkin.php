@@ -117,11 +117,11 @@
                     <tbody>
                         <?php
                         $query = mysqli_query($con, "SELECT member.fullname as member_fullname, instructor.fullname as instructor_fullname, 
-                        rates.type, TRANSACTION.payment, TRANSACTION.tdate, 
-                        TRANSACTION.MOP, TRANSACTION.status FROM TRANSACTION 
-                        INNER JOIN member ON member.id=TRANSACTION.member_id
-                        INNER JOIN instructor ON instructor.id=TRANSACTION.instructor_id
-                        INNER JOIN rates ON rates.id=TRANSACTION.rates_id");
+                        rates.type, transaction.payment, transaction.tdate, 
+                        transaction.MOP, transaction.status FROM transaction 
+                        INNER JOIN member ON member.id=transaction.member_id
+                        INNER JOIN instructor ON instructor.id=transaction.instructor_id
+                        INNER JOIN rates ON rates.id=transaction.rates_id");
                         while ($row = mysqli_fetch_array($query)) {
                         ?>
                         <tr>
