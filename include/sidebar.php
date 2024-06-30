@@ -104,6 +104,11 @@
                     <div data-i18n="Notifications">Blogs</div>
                   </a>
                 </li>
+                <li class="menu-item">
+                  <a href="feedback.php" class="menu-link">
+                    <div data-i18n="Notifications">Feedback</div>
+                  </a>
+                </li>
               </ul>
             </li>
             <li class="menu-item">
