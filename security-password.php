@@ -5,57 +5,34 @@
         if(isset($_POST["submit"]))
         {
 
-            $username = $_POST['username'];
+            $answer = $_POST['answer'];
             $password = md5($_POST['password']);
+            $sq_question = $_POST['sq_question'];
 
             
-
-            $user = mysqli_query($con, "SELECT * FROM users WHERE username = '$username' and active = 1");
+            $username = $_GET['username'];
+            $user = mysqli_query($con, "SELECT * FROM security_questions
+            INNER JOIN users ON users.sq_id=security_questions.id
+            WHERE users.sq_answer = '$answer' and users.username = '$username' AND users.sq_id='$sq_question'");
             $rowuser = mysqli_fetch_array($user);
 
             $checkusername = mysqli_num_rows($user);
 
             if($checkusername > 0)
             {
-              if ($password == $rowuser['password']) {
-                
-                session_start();
-                session_regenerate_id();
-
-                $_SESSION['loggedin'] = TRUE;
-                $_SESSION['role'] = $rowuser['role'];
-                $_SESSION['username'] = $rowuser['username'];
-                $_SESSION['id'] = $rowuser['id'];
-
-                // echo $_SESSION['role'];
-
-                if($rowuser['role'] == 1)
+                $username = $rowuser['username'];
+                $queryInsert = mysqli_query($con, "UPDATE users SET `password`= '$password' WHERE username = '$username'");
+                if($queryInsert)
                 {
-                    header('location: admin/index.php');
+                    echo "<script>alert('Successfully Changed')</script>";
+                    header('location: login.php');
                 }
-                else if($rowuser['role'] == 2) {
-                    $id = $_SESSION['id'];
-                    $client = mysqli_query($con, "SELECT * FROM instructor WHERE user_id = '$id'");
-                    $res = mysqli_fetch_array($client);
-                    $_SESSION['fullname'] = $res['client_name'];
-                    $_SESSION['instructor_id'] = $res['id'];
-                    header('location: instructor/index.php');
+                else
+                {
+                    echo "<script>alert('Something Went Wrong!')</script>";
                 }
-                else if($rowuser['role'] == 3) {
-                  $id = $_SESSION['id'];
-                  $client = mysqli_query($con, "SELECT * FROM member WHERE user_id = '$id'");
-                  $res = mysqli_fetch_array($client);
-                  $_SESSION['fullname'] = $res['fullname'];
-                  $_SESSION['member_id'] = $res['id'];
-                  header('location: member/index.php');
-              }
-                
-
-              } else {
-                echo "<script>alert('Invalid Password.')</script>";
-              }
             } else {
-                echo "<script>alert('Invalid Username or Password.')</script>";
+                echo "<script>alert('Something Went Wrong!')</script>";
             }
             
 
@@ -186,50 +163,48 @@
               </div>
               <!-- /Logo -->
               <h4 class="mb-2">Welcome to Gym System! 👋</h4>
-              <p class="mb-4">Please sign-in to your account and start the adventure</p>
+              <p class="mb-4">Security Password</p>
 
               <form id="formAuthentication" class="mb-3" method="POST">
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email or Username</label>
+              <?php
+                    $sec_id = $_GET['sq_id'];
+                    $querySecQuestion = mysqli_query($con, "SELECT * FROM security_questions WHERE id = $sec_id");
+                    
+                ?>
+              <div class="mb-3" style="text-align: left;">
+                  <label for="email" class="form-label">Security Question</label>
+                 <select name="sq_question" class="form-control" id="">
+                    <?php while($rowSQ = mysqli_fetch_array($querySecQuestion)) { ?>
+                    <option selected value="<?php echo $rowSQ['id']; ?>"><?php echo $rowSQ['questions']; ?></option>
+                    <?php } ?>
+                 </select>
+                </div>
+                <div class="mb-3" style="text-align: left;">
+                  <label for="email" class="form-label">Answer</label>
                   <input
                     type="text"
                     class="form-control"
                     id="email"
-                    name="username"
-                    placeholder="Enter your username"
+                    name="answer"
+                    placeholder="Enter your Answer"
                     autofocus
                   />
                 </div>
-                <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">Password</label>
-                    <a href="forgot-password.php">
-                      <small>Forgot Password?</small>
-                    </a>
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password"
-                    />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
+                <div class="mb-3" style="text-align: left;">
+                  <label for="email" class="form-label">New Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="email"
+                    name="password"
+                    placeholder="Enter your Password"
+                    autofocus
+                  />
                 </div>
                 <div class="mb-3">
-                  <input type="submit" class="btn btn-primary d-grid w-100" name="submit" value="Login">
+                  <input type="submit" class="btn btn-primary d-grid w-100" name="submit" value="Change">
                 </div>
               </form>
-
-              <p class="text-center">
-                <span>New on our platform?</span>
-                <a href="register.php">
-                  <span>Create an account</span>
-                </a>
-              </p>
             </div>
           </div>
           <!-- /Register -->

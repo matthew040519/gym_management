@@ -89,52 +89,21 @@
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Dashboard</h4>
-            <div class="col-lg-12 mb-4 order-0">
-                  <div class="card">
-                    <div class="d-flex align-items-end row">
-                      <div class="col-sm-7">
-                        <div class="card-body">
-                          <h5 class="card-title text-primary">Good Day <?php echo $_SESSION['fullname']; ?>! 🎉</h5>
-                          <p class="mb-4">
-                          “I hated every minute of training, but I said, ‘Don’t quit. Suffer now and live the rest of your life as a champion.” – Muhammad Ali
-                          </p>
-
-                          <!-- <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a> -->
-                        </div>
-                      </div>
-                      <div class="col-sm-5 text-center text-sm-left">
-                        <div class="card-body pb-0 px-0 px-md-4">
-                          <img
-                            src="../assets/img/illustrations/man-with-laptop-light.png"
-                            height="140"
-                            alt="View Badge User"
-                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                            data-app-light-img="illustrations/man-with-laptop-light.png"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Listing /</span> Products</h4>
               <div class="row mb-5">
                 <?php 
-                $query = mysqli_query($con, "SELECT * FROM package");
+                $query = mysqli_query($con, "SELECT * FROM products");
                 while($row = mysqli_fetch_array($query)){
                 ?>
                   <div class="col-md-6 col-lg-3 mb-3">
                   <div class="card h-100">
-                    <img class="card-img-top" src="../include/gym_logo.jpg" alt="Card image cap" />
+                    <img class="card-img-top" src="../images/products/<?php echo $row['product_image']; ?>" alt="Card image cap" />
                     <div class="card-body">
-                      <h5 class="card-title" style="font-weight: bold;"><?php echo $row['package_name']; ?></h5>
-                      <h4>&#8369; <?php echo number_format($row['amount'], 2); ?></h4>
+                      <h5 class="card-title" style="font-weight: bold;"><?php echo $row['product_name']; ?></h5>
+                      <h4>&#8369; <?php echo number_format($row['price'], 2); ?></h4>
                       <p class="card-text">
-                        <blockquote><?php echo $row['details']; ?></blockquote>
+                        <blockquote><?php echo $row['product_details']; ?></blockquote>
                       </p>
-                      <!-- <a href="javascript:void(0)" class="btn btn-outline-primary">Go somewhere</a> -->
-                      <ul>
-                        <li>Duration: <?php echo $row['duration']; ?></li>
-                      </ul>
                       </div>
                   </div>
                 </div>

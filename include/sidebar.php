@@ -94,6 +94,16 @@
                     <div data-i18n="Notifications">Packages</div>
                   </a>
                 </li>
+                <li class="menu-item">
+                  <a href="products.php" class="menu-link">
+                    <div data-i18n="Notifications">Products</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="blogs.php" class="menu-link">
+                    <div data-i18n="Notifications">Blogs</div>
+                  </a>
+                </li>
               </ul>
             </li>
             <li class="menu-item">
@@ -142,6 +152,12 @@
                 </li>
               </ul>
             </li>
+            <li class="menu-item">
+              <a href="profile.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-key"></i>
+                <div data-i18n="Analytics">Change Password </div>
+              </a>
+            </li>
             <?php } else if($_SESSION['role'] == 3){ ?>
               <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -154,8 +170,31 @@
                     <div data-i18n="Notifications">Packages</div>
                   </a>
                 </li>
+                <li class="menu-item">
+                  <a href="products.php" class="menu-link">
+                    <div data-i18n="Notifications">Products</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="blogs.php" class="menu-link">
+                    <div data-i18n="Notifications">Blogs</div>
+                  </a>
+                </li>
               </ul>
             </li>
-              <?php } ?>
+            <li class="menu-item mt-3">
+              <a href="profile.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <div data-i18n="Analytics">Profile </div>
+              </a>
+            </li>
+              <?php } else if($_SESSION['role'] == 2) { ?>
+                <li class="menu-item mt-3">
+              <a href="profile.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                <div data-i18n="Analytics">Profile </div>
+              </a>
+            </li>
+                <?php } ?>
           </ul>
         </aside>

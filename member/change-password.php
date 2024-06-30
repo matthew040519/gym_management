@@ -89,81 +89,106 @@
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Dashboard</h4>
-            <div class="col-lg-12 mb-4 order-0">
-                  <div class="card">
-                    <div class="d-flex align-items-end row">
-                      <div class="col-sm-7">
-                        <div class="card-body">
-                          <h5 class="card-title text-primary">Good Day <?php echo $_SESSION['fullname']; ?>! 🎉</h5>
-                          <p class="mb-4">
-                          “I hated every minute of training, but I said, ‘Don’t quit. Suffer now and live the rest of your life as a champion.” – Muhammad Ali
-                          </p>
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Profile</h4>
+            
+            <div class="row">
+                <div class="col-md-12">
+                  <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                  <li class="nav-item">
+                      <a class="nav-link" href="profile.php"><i class="bx bx-user me-1"></i> Account</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="profile-package.php"
+                        ><i class="bx bx-link-alt me-1"></i> Package</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="change-password.php"
+                        ><i class="bx bx-key me-1"></i> Change Password</a
+                      >
+                    </li>
+                  </ul>
+                  <div class="row">
+                      <div class="col-md-6">
+                        <div class="card mb-4">
+                          <h5 class="card-header">Change Password</h5>
+                          <hr class="my-0" />
+                          <div class="card-body">
+                            <form method="POST">
+                              <div class="row">
+                                <div class="mb-3 col-md-12">
+                                  <label for="firstName" class="form-label">New Password</label>
+                                  <input
+                                    class="form-control"
+                                    type="password"
+                                    id="firstName"
+                                    name="password"
+                                    autofocus
+                                  />
+                                </div>
+                              </div>
+                              <div class="mt-2">
+                                <!-- <button type="submit" name="submit" class="btn btn-primary me-2">Save changes</button>
+                                  -->
+                                <input type="submit" name="submit" class="btn btn-primary me-2">
+                              </div>
+                            </form>
+                          </div>
+                          <!-- /Account -->
+                        </div>
+                      </div>
+                  </div>
 
-                          <!-- <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a> -->
-                        </div>
-                      </div>
-                      <div class="col-sm-5 text-center text-sm-left">
-                        <div class="card-body pb-0 px-0 px-md-4">
-                          <img
-                            src="../assets/img/illustrations/man-with-laptop-light.png"
-                            height="140"
-                            alt="View Badge User"
-                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                            data-app-light-img="illustrations/man-with-laptop-light.png"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <div class="row mb-5">
-                <?php 
-                $query = mysqli_query($con, "SELECT * FROM package");
-                while($row = mysqli_fetch_array($query)){
-                ?>
-                  <div class="col-md-6 col-lg-3 mb-3">
-                  <div class="card h-100">
-                    <img class="card-img-top" src="../include/gym_logo.jpg" alt="Card image cap" />
+                  <?php
+if(isset($_POST['submit']))
+{
+    $password = md5($_POST['password']);
+    $id = $_SESSION['id'];
+    $queryInsert = mysqli_query($con, "UPDATE users SET `password`= '$password' WHERE id = '$id'");
+    if($queryInsert)
+    {
+        echo "<script>alert('Update Success!')</script>";
+        echo "<script>location.replace('change-password.php')</script>";
+    }
+    else
+    {
+        echo "<script>alert('Something went wrong!')</script>";
+    }
+    
+}
+
+?>
+                  
+                  <!-- <div class="card">
+                    <h5 class="card-header">Delete Account</h5>
                     <div class="card-body">
-                      <h5 class="card-title" style="font-weight: bold;"><?php echo $row['package_name']; ?></h5>
-                      <h4>&#8369; <?php echo number_format($row['amount'], 2); ?></h4>
-                      <p class="card-text">
-                        <blockquote><?php echo $row['details']; ?></blockquote>
-                      </p>
-                      <!-- <a href="javascript:void(0)" class="btn btn-outline-primary">Go somewhere</a> -->
-                      <ul>
-                        <li>Duration: <?php echo $row['duration']; ?></li>
-                      </ul>
+                      <div class="mb-3 col-12 mb-0">
+                        <div class="alert alert-warning">
+                          <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete your account?</h6>
+                          <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
+                        </div>
                       </div>
-                  </div>
+                      <form id="formAccountDeactivation" onsubmit="return false">
+                        <div class="form-check mb-3">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="accountActivation"
+                            id="accountActivation"
+                          />
+                          <label class="form-check-label" for="accountActivation"
+                            >I confirm my account deactivation</label
+                          >
+                        </div>
+                        <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
+                      </form>
+                    </div>
+                  </div> -->
                 </div>
-                <?php } ?>
               </div>
             </div>
 
-            <?php
-
-                            if(isset($_POST['subs']))
-                            {
-                                date_default_timezone_set('Asia/Manila');
-                                $tdate = date("Y-m-d");
-                                $id = $_POST['id'];
-                                $user_id = $_SESSION['member_id'];
-                                $queryInsert = mysqli_query($con, "INSERT INTO member_package (`member_id`, `package_id`, `tdate`) 
-                                VALUES ('$user_id', '$id', '$tdate')");
-                                if($queryInsert)
-                                {
-                                    echo "<script>location.replace('packages.php?success')</script>";
-                                }
-                                else
-                                {
-                                    echo "<script>alert('Something went wrong!')</script>";
-                                }
-                                
-                            }
-                        
-                        ?>
+            
             
 
             <!-- / Content -->

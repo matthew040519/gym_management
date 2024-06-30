@@ -10,8 +10,11 @@
             $fullname = $_POST['fullname'];
             $contact_number = $_POST['contact_number'];
             $address = $_POST['address'];
+            $sec_question = $_POST['sec_question'];
+            $answer = $_POST['answer'];
 
-            mysqli_query($con, "INSERT INTO users (`username`, `password`, `role`) VALUES ('$username', '$password', 3)");
+            mysqli_query($con, "INSERT INTO users (`username`, `password`, `role`, `sq_id`, `sq_answer`) 
+            VALUES ('$username', '$password', 3, '$sec_question', '$answer')");
 
                   $users = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'");
                   $rowUsers = mysqli_fetch_array($users);
@@ -186,6 +189,35 @@
                     <textarea name="address" placeholder="Enter your Address" class="form-control" id=""></textarea>
                   </div>
                 </div>
+                <div class="mb-3 form-password-toggle">
+                  <!-- <div class="d-flex justify-content-between">
+                    <label class="form-label" for="password">Password</label>
+                    <a href="auth-forgot-password-basic.html">
+                      <small>Forgot Password?</small>
+                    </a>
+                  </div> -->
+                  <label for="email" class="form-label">Security Questions</label>
+                  <div class="input-group input-group-merge">
+                    <select name="sec_questions" class="form-control" id="">
+                      <?php $query = mysqli_query($con, "SELECT * FROM security_questions");
+                      while($row = mysqli_fetch_array($query)){ ?>
+                        <option value="<?php echo $row['id']; ?>"><?php echo $row['questions']; ?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="mb-3 form-password-toggle">
+                  <!-- <div class="d-flex justify-content-between">
+                    <label class="form-label" for="password">Password</label>
+                    <a href="auth-forgot-password-basic.html">
+                      <small>Forgot Password?</small>
+                    </a>
+                  </div> -->
+                  <label for="email" class="form-label">Answer</label>
+                  <div class="input-group input-group-merge">
+                    <input type="text" name="answer" class="form-control">
+                  </div>
+                </div>
                 <div class="mb-3">
                   <input type="submit" class="btn btn-primary d-grid w-100" name="submit" value="Register">
                 </div>
@@ -193,7 +225,7 @@
 
               <p class="text-center">
                 <span>Already have an account?</span>
-                <a href="index.php">
+                <a href="login.php">
                   <span>Sign in instead</span>
                 </a>
               </p>

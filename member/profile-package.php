@@ -89,40 +89,35 @@
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Dashboard</h4>
-            <div class="col-lg-12 mb-4 order-0">
-                  <div class="card">
-                    <div class="d-flex align-items-end row">
-                      <div class="col-sm-7">
-                        <div class="card-body">
-                          <h5 class="card-title text-primary">Good Day <?php echo $_SESSION['fullname']; ?>! 🎉</h5>
-                          <p class="mb-4">
-                          “I hated every minute of training, but I said, ‘Don’t quit. Suffer now and live the rest of your life as a champion.” – Muhammad Ali
-                          </p>
-
-                          <!-- <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a> -->
-                        </div>
-                      </div>
-                      <div class="col-sm-5 text-center text-sm-left">
-                        <div class="card-body pb-0 px-0 px-md-4">
-                          <img
-                            src="../assets/img/illustrations/man-with-laptop-light.png"
-                            height="140"
-                            alt="View Badge User"
-                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                            data-app-light-img="illustrations/man-with-laptop-light.png"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <div class="row mb-5">
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> </span>Profile</h4>
+            
+            <div class="row">
+                <div class="col-md-12">
+                  <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                    <li class="nav-item">
+                      <a class="nav-link" href="profile.php"><i class="bx bx-user me-1"></i> Account</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="profile-package.php"
+                        ><i class="bx bx-link-alt me-1"></i> Package</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="change-password.php"
+                        ><i class="bx bx-key me-1"></i> Change Password</a
+                      >
+                    </li>
+                    
+                  </ul>
+                  <div class="row mb-5">
                 <?php 
-                $query = mysqli_query($con, "SELECT * FROM package");
+                $id = $_SESSION['member_id'];
+                $query = mysqli_query($con, "SELECT * FROM package 
+                INNER JOIN member_package ON member_package.package_id=package.id
+                WHERE member_package.member_id = $id AND finish = 0");
                 while($row = mysqli_fetch_array($query)){
                 ?>
-                  <div class="col-md-6 col-lg-3 mb-3">
+                  <div class="col-md-6 col-lg-6 mb-3">
                   <div class="card h-100">
                     <img class="card-img-top" src="../include/gym_logo.jpg" alt="Card image cap" />
                     <div class="card-body">
@@ -138,7 +133,68 @@
                       </div>
                   </div>
                 </div>
+                <?php  } ?>
+                <?php 
+                $query = mysqli_query($con, "SELECT * FROM instructor
+                INNER JOIN member_package ON member_package.instructor_id=instructor.id
+                WHERE member_package.member_id = $id AND finish = 0");
+                while($row = mysqli_fetch_array($query)){
+                ?>
+                  <div class="col-md-6 col-lg-6 mb-3">
+                  <div class="card h-100">
+                    <img class="card-img-top" style="height: 300px;" src="../assets/img/profile/<?php echo $row['image']; ?>" alt="Card image cap" />
+                    <div class="card-body">
+                      <h4 class="card-title" style="font-weight: bold;"><?php echo $row['fullname']; ?></h4>
+                      
+                      <p class="card-text">
+                        <blockquote><?php echo $row['biography']; ?></blockquote>
+                      </p>
+                      <!-- <a href="javascript:void(0)" class="btn btn-outline-primary">Go somewhere</a> -->
+                      <h5>Expertise:</h5>
+                      <ul>
+                        <?php
+                            $id = $row['id'];
+                            $instructor_skills = mysqli_query($con, "SELECT * FROM instructor_skills 
+                            INNER JOIN instructor_types ON instructor_skills.type_id=instructor_types.id 
+                            WHERE instructor_skills.instructor_id = '$id'");
+
+                            while($instructor_skills_data = mysqli_fetch_array($instructor_skills)){
+                        ?>
+                            <li><?php echo $instructor_skills_data['types']; ?></li>
+                        <?php } ?>
+                      </ul>
+                      </div>
+                  </div>
+                </div>
                 <?php } ?>
+              </div>
+                  
+                  <!-- <div class="card">
+                    <h5 class="card-header">Delete Account</h5>
+                    <div class="card-body">
+                      <div class="mb-3 col-12 mb-0">
+                        <div class="alert alert-warning">
+                          <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete your account?</h6>
+                          <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
+                        </div>
+                      </div>
+                      <form id="formAccountDeactivation" onsubmit="return false">
+                        <div class="form-check mb-3">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="accountActivation"
+                            id="accountActivation"
+                          />
+                          <label class="form-check-label" for="accountActivation"
+                            >I confirm my account deactivation</label
+                          >
+                        </div>
+                        <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
+                      </form>
+                    </div>
+                  </div> -->
+                </div>
               </div>
             </div>
 

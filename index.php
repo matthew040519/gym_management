@@ -396,17 +396,15 @@ https://templatemo.com/tm-548-training-studio
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-xs-12">
-                    <div id="map">
-                      <iframe src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="600px" frameborder="0" style="border:0" allowfullscreen></iframe>
-                    </div>
+                <div style="max-width:100%;list-style:none; transition: none;overflow:hidden;height:600px;"><div id="embed-map-display" style="height:100%; width:100%;max-width:100%;"><iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q=Barangay+Ibaba,+Malabon,+Metro+Manila,+Philippines&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe></div><a class="google-maps-html" href="https://www.bootstrapskins.com/themes" id="auth-map-data">premium bootstrap themes</a><style>#embed-map-display img.text-marker{max-width:none!important;background:none!important;}img{max-width:none}</style></div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-12">
                     <div class="contact-form">
-                        <form id="contact" action="" method="post">
+                        <form id="contact" method="post">
                           <div class="row">
                             <div class="col-md-6 col-sm-12">
                               <fieldset>
-                                <input name="name" type="text" id="name" placeholder="Your Name*" required="">
+                                <input name="fullname" type="text" id="fullname" placeholder="Your Name*" required="">
                               </fieldset>
                             </div>
                             <div class="col-md-6 col-sm-12">
@@ -416,7 +414,7 @@ https://templatemo.com/tm-548-training-studio
                             </div>
                             <div class="col-md-12 col-sm-12">
                               <fieldset>
-                                <input name="subject" type="text" id="subject" placeholder="Subject">
+                                <input name="subject" type="text" required id="subject" placeholder="Subject">
                               </fieldset>
                             </div>
                             <div class="col-lg-12">
@@ -426,7 +424,7 @@ https://templatemo.com/tm-548-training-studio
                             </div>
                             <div class="col-lg-12">
                               <fieldset>
-                                <button type="submit" id="form-submit" class="main-button">Send Message</button>
+                                <button type="submit" id="form-submit" name="send" class="main-button">Send Message</button>
                               </fieldset>
                             </div>
                           </div>
@@ -436,6 +434,33 @@ https://templatemo.com/tm-548-training-studio
             </div>
         </div>
     </section>
+    <?php
+        include('include/connection.php');
+        if(isset($_POST['send']))
+        {
+            $fullname = $_POST['fullname'];
+            $email = $_POST['email'];
+            $subject = $_POST['subject'];
+            $message = $_POST['message'];
+            date_default_timezone_set('Asia/Manila');
+                    $tdate = date("Y-m-d h:i:s");
+
+
+                    $query = mysqli_query($con, "INSERT INTO contact_us (`fullname`, `email`, `subject`, `message`, `tdate`)
+                    VALUES ('$fullname', '$email', '$subject', '$message', '$tdate')");
+
+                    // if($query) {
+                        echo "<script>alert('Message Sent!')</script>";
+                    // }
+                    // else
+                    // {
+                    //     echo "<script>alert('Something Went Wrong!')</script>";
+                    // }
+            
+            
+        }
+    
+    ?>
     <!-- ***** Contact Us Area Ends ***** -->
     
     <!-- ***** Footer Start ***** -->

@@ -15,45 +15,13 @@
 
             $checkusername = mysqli_num_rows($user);
 
+           
+
             if($checkusername > 0)
             {
-              if ($password == $rowuser['password']) {
-                
-                session_start();
-                session_regenerate_id();
-
-                $_SESSION['loggedin'] = TRUE;
-                $_SESSION['role'] = $rowuser['role'];
-                $_SESSION['username'] = $rowuser['username'];
-                $_SESSION['id'] = $rowuser['id'];
-
-                // echo $_SESSION['role'];
-
-                if($rowuser['role'] == 1)
-                {
-                    header('location: admin/index.php');
-                }
-                else if($rowuser['role'] == 2) {
-                    $id = $_SESSION['id'];
-                    $client = mysqli_query($con, "SELECT * FROM instructor WHERE user_id = '$id'");
-                    $res = mysqli_fetch_array($client);
-                    $_SESSION['fullname'] = $res['client_name'];
-                    $_SESSION['instructor_id'] = $res['id'];
-                    header('location: instructor/index.php');
-                }
-                else if($rowuser['role'] == 3) {
-                  $id = $_SESSION['id'];
-                  $client = mysqli_query($con, "SELECT * FROM member WHERE user_id = '$id'");
-                  $res = mysqli_fetch_array($client);
-                  $_SESSION['fullname'] = $res['fullname'];
-                  $_SESSION['member_id'] = $res['id'];
-                  header('location: member/index.php');
-              }
-                
-
-              } else {
-                echo "<script>alert('Invalid Password.')</script>";
-              }
+                $username = $rowuser['username'];
+                $sec_id = $rowuser['sq_id'];
+                header('location: security-password.php?username='.$username.'&sq_id='.$sec_id.'');
             } else {
                 echo "<script>alert('Invalid Username or Password.')</script>";
             }
@@ -186,9 +154,10 @@
               </div>
               <!-- /Logo -->
               <h4 class="mb-2">Welcome to Gym System! 👋</h4>
-              <p class="mb-4">Please sign-in to your account and start the adventure</p>
+              <p class="mb-4">Forgot Password</p>
 
               <form id="formAuthentication" class="mb-3" method="POST">
+                
                 <div class="mb-3">
                   <label for="email" class="form-label">Email or Username</label>
                   <input
@@ -200,36 +169,10 @@
                     autofocus
                   />
                 </div>
-                <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">Password</label>
-                    <a href="forgot-password.php">
-                      <small>Forgot Password?</small>
-                    </a>
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password"
-                    />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
-                </div>
                 <div class="mb-3">
-                  <input type="submit" class="btn btn-primary d-grid w-100" name="submit" value="Login">
+                  <input type="submit" class="btn btn-primary d-grid w-100" name="submit" value="Verify">
                 </div>
               </form>
-
-              <p class="text-center">
-                <span>New on our platform?</span>
-                <a href="register.php">
-                  <span>Create an account</span>
-                </a>
-              </p>
             </div>
           </div>
           <!-- /Register -->

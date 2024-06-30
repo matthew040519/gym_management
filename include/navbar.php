@@ -55,7 +55,14 @@
                           </div>
                           <div class="flex-grow-1">
                             <span class="fw-semibold d-block"><?php echo $_SESSION['username']; ?></span>
-                            <small class="text-muted">Admin</small>
+                            <?php if($_SESSION['role'] == 3) {
+                              $status = "Member";
+                            } else if($_SESSION['role'] == 2) {
+                              $status = "Instructor";
+                            } else {
+                              $status = "Member";
+                            } ?>
+                            <small class="text-muted"><?php echo $status; ?></small>
                           </div>
                         </div>
                       </a>
