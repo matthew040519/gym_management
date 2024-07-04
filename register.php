@@ -10,7 +10,7 @@
             $fullname = $_POST['fullname'];
             $contact_number = $_POST['contact_number'];
             $address = $_POST['address'];
-            $sec_question = $_POST['sec_question'];
+            $sec_question = $_POST['sec_questions'];
             $answer = $_POST['answer'];
 
             mysqli_query($con, "INSERT INTO users (`username`, `password`, `role`, `sq_id`, `sq_answer`) 
@@ -23,7 +23,7 @@
             mysqli_query($con, "INSERT INTO member (`fullname`, `address`, `contact_number`, `user_id`) 
             VALUES ('$fullname', '$address', '$contact_number', '$user_id')");
 
-            echo "<script>location.replace('index.php')</script>";
+            // echo "<script>location.replace('index.php')</script>";
             
 
         }
@@ -198,7 +198,7 @@
                   </div> -->
                   <label for="email" class="form-label">Security Questions</label>
                   <div class="input-group input-group-merge">
-                    <select name="sec_questions" class="form-control" id="">
+                    <select name="sec_questions" class="form-control" id="" required>
                       <?php $query = mysqli_query($con, "SELECT * FROM security_questions");
                       while($row = mysqli_fetch_array($query)){ ?>
                         <option value="<?php echo $row['id']; ?>"><?php echo $row['questions']; ?></option>
@@ -215,7 +215,7 @@
                   </div> -->
                   <label for="email" class="form-label">Answer</label>
                   <div class="input-group input-group-merge">
-                    <input type="text" name="answer" class="form-control">
+                    <input type="text" name="answer" class="form-control" required>
                   </div>
                 </div>
                 <div class="mb-3">
