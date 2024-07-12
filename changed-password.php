@@ -5,35 +5,39 @@
         if(isset($_POST["submit"]))
         {
 
-            $answer = $_POST['answer'];
-            $password = md5($_POST['password']);
-            $sq_question = $_POST['sq_question'];
+            $old_password = $_POST['old_password'];
+            $new_password = $_POST['new_password'];
+            $confirm_password = $_POST['confirm_password'];
 
             
-            $username = $_GET['username'];
-            $user = mysqli_query($con, "SELECT * FROM security_questions
-            INNER JOIN users ON users.sq_id=security_questions.id
-            WHERE users.sq_answer = '$answer' and users.username = '$username' AND users.sq_id='$sq_question'");
+            $id = $_GET['id'];
+            $user = mysqli_query($con, "SELECT * FROM users
+            WHERE users.id = '$id' and password = MD5('$old_password')");
             $rowuser = mysqli_fetch_array($user);
-            $id = $rowuser['id'];
+
             $checkusername = mysqli_num_rows($user);
 
             if($checkusername > 0)
             {
-                header("location: changed-password.php?id=$id");
-                // $username = $rowuser['username'];
-                // $queryInsert = mysqli_query($con, "UPDATE users SET `password`= '$password' WHERE username = '$username'");
-                // if($queryInsert)
-                // {
-                //     echo "<script>alert('Successfully Changed')</script>";
-                //     header('location: login.php');
-                // }
-                // else
-                // {
-                //     echo "<script>alert('Something Went Wrong!')</script>";
-                // }
+                if($new_password == $new_password)
+                {
+                    $queryInsert = mysqli_query($con, "UPDATE users SET `password`= MD5('$new_password') WHERE id = '$id'");
+                    if($queryInsert)
+                    {
+                        echo "<script>alert('Successfully Changed')</script>";
+                        header('location: login.php');
+                    }
+                    else
+                    {
+                        echo "<script>alert('Something Went Wrong!')</script>";
+                    }
+                }
+                else
+                {
+                    echo "<script>alert('Password Not Match!')</script>";
+                }
             } else {
-                echo "<script>alert('Something Went Wrong!')</script>";
+                echo "<script>alert('Incorrect Old Password!')</script>";
             }
             
 
@@ -167,27 +171,36 @@
               <p class="mb-4">Security Password</p>
 
               <form id="formAuthentication" class="mb-3" method="POST">
-              <?php
-                    $sec_id = $_GET['sq_id'];
-                    $querySecQuestion = mysqli_query($con, "SELECT * FROM security_questions WHERE id = $sec_id");
-                    
-                ?>
               <div class="mb-3" style="text-align: left;">
-                  <label for="email" class="form-label">Security Question</label>
-                 <select name="sq_question" class="form-control" id="">
-                    <?php while($rowSQ = mysqli_fetch_array($querySecQuestion)) { ?>
-                    <option selected value="<?php echo $rowSQ['id']; ?>"><?php echo $rowSQ['questions']; ?></option>
-                    <?php } ?>
-                 </select>
-                </div>
-                <div class="mb-3" style="text-align: left;">
-                  <label for="email" class="form-label">Answer</label>
+                  <label for="email" class="form-label">Old Password</label>
                   <input
-                    type="text"
+                    type="password"
                     class="form-control"
                     id="email"
-                    name="answer"
-                    placeholder="Enter your Answer"
+                    name="old_password"
+                    placeholder="Enter your Password"
+                    autofocus
+                  />
+                </div>
+                <div class="mb-3" style="text-align: left;">
+                  <label for="email" class="form-label">New Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="email"
+                    name="new_password"
+                    placeholder="Enter your Password"
+                    autofocus
+                  />
+                </div>
+                <div class="mb-3" style="text-align: left;">
+                  <label for="email" class="form-label">Confirm Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="email"
+                    name="confirm_password"
+                    placeholder="Enter your Password"
                     autofocus
                   />
                 </div>

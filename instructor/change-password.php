@@ -115,14 +115,34 @@
                           <hr class="my-0" />
                           <div class="card-body">
                             <form method="POST">
-                              <div class="row">
+                            <div class="row">
+                                <div class="mb-3 col-md-12">
+                                  <label for="firstName" class="form-label">Old Password</label>
+                                  <input
+                                    class="form-control"
+                                    type="password"
+                                    id="firstName"
+                                    name="old_password"
+                                    autofocus
+                                  />
+                                </div>
                                 <div class="mb-3 col-md-12">
                                   <label for="firstName" class="form-label">New Password</label>
                                   <input
                                     class="form-control"
                                     type="password"
                                     id="firstName"
-                                    name="password"
+                                    name="new_password"
+                                    autofocus
+                                  />
+                                </div>
+                                <div class="mb-3 col-md-12">
+                                  <label for="firstName" class="form-label">Confirm Password</label>
+                                  <input
+                                    class="form-control"
+                                    type="password"
+                                    id="firstName"
+                                    name="confirm_password"
                                     autofocus
                                   />
                                 </div>
@@ -142,18 +162,39 @@
                   <?php
 if(isset($_POST['submit']))
 {
-    $password = md5($_POST['password']);
-    $id = $_SESSION['id'];
-    $queryInsert = mysqli_query($con, "UPDATE users SET `password`= '$password' WHERE id = '$id'");
-    if($queryInsert)
-    {
-        echo "<script>alert('Update Success!')</script>";
-        echo "<script>location.replace('change-password.php')</script>";
-    }
-    else
-    {
-        echo "<script>alert('Something went wrong!')</script>";
-    }
+  $old_password = $_POST['old_password'];
+  $new_password = $_POST['new_password'];
+  $confirm_password = $_POST['confirm_password'];
+
+  
+  $id = $_SESSION['id'];
+  $user = mysqli_query($con, "SELECT * FROM users
+  WHERE users.id = '$id' and password = MD5('$old_password')");
+  $rowuser = mysqli_fetch_array($user);
+
+  $checkusername = mysqli_num_rows($user);
+
+  if($checkusername > 0)
+  {
+      if($new_password == $new_password)
+      {
+          $queryInsert = mysqli_query($con, "UPDATE users SET `password`= MD5('$new_password') WHERE id = '$id'");
+          if($queryInsert)
+          {
+              echo "<script>alert('Successfully Changed')</script>";
+          }
+          else
+          {
+              echo "<script>alert('Something Went Wrong!')</script>";
+          }
+      }
+      else
+      {
+          echo "<script>alert('Password Not Match!')</script>";
+      }
+  } else {
+      echo "<script>alert('Incorrect Old Password!')</script>";
+  }
     
 }
 
