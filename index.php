@@ -108,7 +108,15 @@ https://templatemo.com/tm-548-training-studio
                             </div>
                             <div class="right-content">
                                 <h4>Basic Fitness</h4>
-                                <p>Please do not re-distribute this template ZIP file on any template collection website. This is not allowed.</p>
+                                <p>Basic fitness encompasses fundamental physical activities and exercises that
+contribute to overall health and well-being. It involves activities like brisk walking,
+jogging, cycling, and simple strength training exercises using body weight or light
+weights. These activities help improve cardiovascular health, build muscular strength
+and endurance, enhance flexibility, and maintain a healthy body weight. Basic fitness
+routines typically include a balance of aerobic exercises for heart health and strength
+exercises for muscle tone and bone strength. Engaging in regular basic fitness activities
+not only improves physical fitness but also boosts mood, reduces stress, and promotes
+better sleep patterns, fostering a healthier and more active lifestyle overall.</p>
                                 <a href="#" class="text-button">Discover More</a>
                             </div>
                         </li>
@@ -117,42 +125,83 @@ https://templatemo.com/tm-548-training-studio
                                 <img src="front_page/assets/images/features-first-icon.png" alt="second one">
                             </div>
                             <div class="right-content">
-                                <h4>New Gym Training</h4>
-                                <p>If you wish to support TemplateMo website via PayPal, please feel free to contact us. We appreciate it a lot.</p>
+                                <h4>NEW GYM TRAINING</h4>
+                                <p>New gym training involves beginning a structured fitness
+program in a gym environment, typically under the guidance of fitness professionals or
+personal trainers. It often starts with an assessment of current fitness levels and health
+goals to tailor a personalized workout plan. New gym-goers may focus on learning
+proper exercise techniques and using various gym equipment effectively, such as
+treadmills, ellipticals, weight machines, and free weights. The training regimen usually
+includes a mix of cardiovascular exercises to improve endurance and strength training
+to build muscle mass and enhance overall strength. Proper warm-up and cool-down
+routines are emphasized to prevent injuries and promote recovery. New gym training is
+not only about physical exercise but also about fostering a positive mindset towards
+fitness, establishing consistent workout habits, and embracing a healthier lifestyle for long-term wellness benefits.</p>
                                 <a href="#" class="text-button">Discover More</a>
                             </div>
                         </li>
                         <li class="feature-item">
                             <div class="left-icon">
-                                <img src="front_page/assets/images/features-first-icon.png" alt="third gym training">
+                                <img src="front_page/assets/images/features-first-icon.png" alt="second one">
                             </div>
                             <div class="right-content">
-                                <h4>Basic Muscle Course</h4>
-                                <p>Credit goes to <a rel="nofollow" href="https://www.pexels.com" target="_blank">Pexels website</a> for images and video background used in this HTML template.</p>
+                                <h4>BASIC MODULE COURSE</h4>
+                                <p>A basic module course typically serves as an introductory foundation in a specific field
+of study or training program. It covers essential concepts, theories, and practical skills
+essential for understanding the subject matter. These courses are designed to provide
+beginners with a solid framework and fundamental knowledge that forms the basis for
+more advanced learning. Instructors often focus on building a strong understanding of
+core principles through lectures, hands-on activities, and assessments. Basic module
+courses aim to equip learners with the necessary skills and confidence to progress
+further in their chosen area of study or profession, laying a crucial groundwork for future
+specialization and development.</p>
                                 <a href="#" class="text-button">Discover More</a>
                             </div>
                         </li>
+                       
                     </ul>
                 </div>
                 <div class="col-lg-6">
                     <ul class="features-items">
+                    <li class="feature-item">
+                            <div class="left-icon">
+                                <img src="front_page/assets/images/features-first-icon.png" alt="third gym training">
+                            </div>
+                            <div class="right-content">
+                                <h4>ADVANCE BASIC MODULE COURSE</h4>
+                                <p>An advanced basic module course builds upon the foundational knowledge established
+in the basic module, delving deeper into complex concepts and specialized skills within
+a particular subject area. This course is designed for individuals who have completed
+the basic module or have equivalent knowledge and seek to expand their understanding
+and proficiency further. Instructors focus on refining existing skills, introducing advanced
+techniques, and exploring more intricate theories and applications relevant to the field of
+study. Practical exercises, case studies, and hands-on projects are often incorporated
+to deepen learning and foster critical thinking. The advanced basic module course aims
+to prepare participants for higher-level challenges and opportunities within their
+discipline, equipping them with the expertise and confidence needed to excel in more
+advanced coursework or professional endeavors.</p>
+                                <a href="#" class="text-button">Discover More</a>
+                            </div>
+                        </li>
                         <li class="feature-item">
                             <div class="left-icon">
                                 <img src="front_page/assets/images/features-first-icon.png" alt="fourth muscle">
                             </div>
                             <div class="right-content">
-                                <h4>Advanced Muscle Course</h4>
-                                <p>You may want to browse through <a rel="nofollow" href="#" target="_parent">Digital Marketing</a> or <a href="#">Corporate</a> HTML CSS templates on our website.</p>
-                                <a href="#" class="text-button">Discover More</a>
-                            </div>
-                        </li>
-                        <li class="feature-item">
-                            <div class="left-icon">
-                                <img src="front_page/assets/images/features-first-icon.png" alt="training fifth">
-                            </div>
-                            <div class="right-content">
-                                <h4>Yoga Training</h4>
-                                <p>This template is built on Bootstrap v4.3.1 framework. It is easy to adapt the columns and sections.</p>
+                                <h4>Yoga training</h4>
+                                <p>encompasses a holistic approach to physical and mental well-being through a
+combination of poses (asanas), breathing exercises (pranayama), and meditation
+techniques. Rooted in ancient Indian traditions, yoga is practiced worldwide for its
+numerous health benefits, including increased flexibility, strength, and balance, as well
+as stress reduction and improved mental clarity. Yoga training sessions typically begin
+with centering and breathing exercises to calm the mind and establish focus.
+Participants then move through a series of poses that stretch and strengthen the body,
+promoting physical fitness and relaxation simultaneously. Guided by certified
+instructors, yoga training emphasizes proper alignment and mindful movement,
+encouraging practitioners to connect with their bodies and cultivate inner awareness.
+Whether practiced in a studio setting or independently, yoga training offers a versatile
+approach to wellness, catering to individuals of all ages and fitness levels seeking to
+enhance both physical vitality and inner peace.</p>
                                 <a href="#" class="text-button">Discover More</a>
                             </div>
                         </li>
@@ -162,7 +211,19 @@ https://templatemo.com/tm-548-training-studio
                             </div>
                             <div class="right-content">
                                 <h4>Body Building Course</h4>
-                                <p>Suspendisse fringilla et nisi et mattis. Curabitur sed finibus nisi. Integer nibh sapien, vehicula et auctor.</p>
+                                <p>A bodybuilding course is designed to focus on building muscle mass, strength, and
+definition through structured resistance training and nutritional guidance. Participants in
+a bodybuilding course typically follow a regimen that includes weightlifting exercises
+targeting specific muscle groups, such as chest, back, legs, and arms. These workouts
+are carefully planned to progressively overload muscles, stimulating growth and
+adaptation over time. In addition to strength training, bodybuilding courses often
+incorporate cardio exercises to improve cardiovascular health and aid in fat loss, which
+helps to reveal muscle definition. Nutrition plays a crucial role, with emphasis on
+consuming sufficient protein and balanced macros to support muscle growth and
+recovery. Participants may also learn about supplementation and meal planning
+strategies tailored to their fitness goals. Bodybuilding courses are popular among
+individuals aiming to sculpt their physique, enhance muscle symmetry, and achieve a
+lean, muscular appearance through disciplined training and dietary discipline.</p>
                                 <a href="#" class="text-button">Discover More</a>
                             </div>
                         </li>
@@ -179,8 +240,8 @@ https://templatemo.com/tm-548-training-studio
             <div class="row">
                 <div class="col-lg-10 offset-lg-1">
                     <div class="cta-content">
-                        <h2>Don’t <em>think</em>, begin <em>today</em>!</h2>
-                        <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula, sit amet dapibus odio augue eget libero. Morbi tempus mauris a nisi luctus imperdiet.</p>
+                        <h2>DON’T <em>THINK</em>, BEGIN <em>TODAY</em>!</h2>
+                        <p>"Don't Wait, Start Today: Embrace Your Journey Now!"</p>
                         <div class="main-button scroll-to-section">
                             <a href="#our-classes">Become a member</a>
                         </div>
@@ -218,7 +279,17 @@ https://templatemo.com/tm-548-training-studio
                   <article id='tabs-1'>
                     <img src="front_page/assets/images/training-image-01.jpg" alt="First Class">
                     <h4>First Training Class</h4>
-                    <p>Phasellus convallis mauris sed elementum vulputate. Donec posuere leo sed dui eleifend hendrerit. Sed suscipit suscipit erat, sed vehicula ligula. Aliquam ut sem fermentum sem tincidunt lacinia gravida aliquam nunc. Morbi quis erat imperdiet, molestie nunc ut, accumsan diam.</p>
+                    <p>marks the beginning of a journey towards improved fitness and personal growth. It is a
+pivotal moment where beginners step into a supportive environment to learn the basics
+of their chosen discipline, whether it's fitness, martial arts, or any other skill-based
+activity. Instructors typically introduce foundational techniques, provide guidance on
+proper form, and emphasize the importance of consistency and perseverance.
+Participants may experience a mix of excitement and nervousness as they acquaint
+themselves with new equipment, routines, and fellow classmates. The first training class
+sets the tone for future progress, instilling confidence and motivation to continue
+pushing boundaries and achieving personal goals. It's a time to embrace challenges,
+cultivate new skills, and embark on a fulfilling journey of self-improvement and
+discovery.</p>
                     <div class="main-button">
                         <a href="#">View Schedule</a>
                     </div>
@@ -226,7 +297,18 @@ https://templatemo.com/tm-548-training-studio
                   <article id='tabs-2'>
                     <img src="front_page/assets/images/training-image-02.jpg" alt="Second Training">
                     <h4>Second Training Class</h4>
-                    <p>Integer dapibus, est vel dapibus mattis, sem mauris luctus leo, ac pulvinar quam tortor a velit. Praesent ultrices erat ante, in ultricies augue ultricies faucibus. Nam tellus nibh, ullamcorper at mattis non, rhoncus sed massa. Cras quis pulvinar eros. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                    <p>is an integral part of our professional development program, designed to equip
+participants with advanced skills and knowledge essential for their roles. This intensive
+course focuses on honing expertise in areas such as leadership, problem-solving, and
+strategic thinking, preparing individuals to navigate complex challenges with confidence.
+Through interactive sessions, case studies, and practical exercises, participants gain a
+deeper understanding of industry best practices and emerging trends. The Second
+
+Training Class fosters collaboration and networking among peers, creating a dynamic
+learning environment where ideas are exchanged and innovative solutions are explored.
+By the end of the program, participants emerge empowered and ready to drive positive
+change within their organizations, armed with new strategies and perspectives that
+propel both personal and professional growth.</p>
                     <div class="main-button">
                         <a href="#">View Schedule</a>
                     </div>
@@ -234,7 +316,20 @@ https://templatemo.com/tm-548-training-studio
                   <article id='tabs-3'>
                     <img src="front_page/assets/images/training-image-03.jpg" alt="Third Class">
                     <h4>Third Training Class</h4>
-                    <p>Fusce laoreet malesuada rhoncus. Donec ultricies diam tortor, id auctor neque posuere sit amet. Aliquam pharetra, augue vel cursus porta, nisi tortor vulputate sapien, id scelerisque felis magna id felis. Proin neque metus, pellentesque pharetra semper vel, accumsan a neque.</p>
+                    <p>is a pivotal stage in our development series, tailored to elevate participants' capabilities
+to a higher level of proficiency and leadership. This advanced course delves into
+specialized topics such as advanced project management, strategic decision-making,
+
+and organizational transformation. Through rigorous workshops, simulations, and deep-
+dive case studies, participants sharpen their analytical skills and broaden their strategic
+
+perspectives. The Third Training Class emphasizes innovation and adaptive thinking,
+equipping participants to tackle evolving industry challenges with agility and foresight.
+Networking opportunities and collaboration with industry experts further enrich the
+learning experience, fostering a community of leaders poised to drive impactful change
+within their respective fields. Graduates of the Third Training Class emerge not only with
+enhanced expertise but also with a heightened ability to lead teams and influence
+organizational outcomes in a dynamic global landscape.</p>
                     <div class="main-button">
                         <a href="#">View Schedule</a>
                     </div>
@@ -242,7 +337,20 @@ https://templatemo.com/tm-548-training-studio
                   <article id='tabs-4'>
                     <img src="front_page/assets/images/training-image-04.jpg" alt="Fourth Training">
                     <h4>Fourth Training Class</h4>
-                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean ultrices elementum odio ac tempus. Etiam eleifend orci lectus, eget venenatis ipsum commodo et.</p>
+                    <p>represents the pinnacle of our professional development curriculum, tailored for
+seasoned leaders and executives aiming to master advanced strategies and leadership
+paradigms. This elite program focuses on refining executive decision-making, fostering
+innovation at scale, and navigating global complexities with confidence and agility.
+Participants engage in high-level seminars, executive coaching sessions, and
+immersive experiential learning exercises designed to simulate real-world challenges.
+Emphasis is placed on strategic foresight, transformative leadership, and driving
+sustainable growth amidst disruptive forces. The Fourth Training Class leverages deep
+industry insights and global perspectives, cultivating a peer network of distinguished
+leaders who exchange ideas and collaborate on visionary initiatives. Graduates of this
+program emerge equipped not only with enhanced leadership acumen but also with a
+profound ability to drive organizational excellence and shape industry landscapes on a
+
+global scale.</p>
                     <div class="main-button">
                         <a href="#">View Schedule</a>
                     </div>
@@ -402,6 +510,10 @@ https://templatemo.com/tm-548-training-studio
                     <div class="contact-form">
                         <form id="contact" method="post">
                           <div class="row">
+                            <div class="col-md-12">
+                                <h3>Feedback</h3>
+                                <br>
+                            </div>
                             <div class="col-md-6 col-sm-12">
                               <fieldset>
                                 <input name="fullname" type="text" id="fullname" placeholder="Your Name*" required="">

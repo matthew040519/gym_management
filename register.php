@@ -23,7 +23,8 @@
             mysqli_query($con, "INSERT INTO member (`fullname`, `address`, `contact_number`, `user_id`) 
             VALUES ('$fullname', '$address', '$contact_number', '$user_id')");
 
-            // echo "<script>location.replace('index.php')</script>";
+            echo "<script>alert('Successfully Registered!')</script>";
+          
             
 
         }
