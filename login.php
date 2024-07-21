@@ -221,7 +221,7 @@
                 </div>
                 <div class="mb-3">
                   <input type="submit" class="btn btn-primary d-grid w-100" name="submit" value="Login"><br>
-                  <a href="index.php" class="btn btn-secondary d-grid w-100">Back to Front Page</a>
+                  <a href="index.php" class="btn btn-secondary d-grid w-100">Back</a>
                 </div>
               </form>
 

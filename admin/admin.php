@@ -184,9 +184,21 @@
                   $username = $_POST['username'];
                   $password = md5($_POST['password']);
 
-                  mysqli_query($con, "INSERT INTO users (`username`, `password`, `role`) VALUES ('$username', '$password', 1)");
+                  $checkifusernameexist = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'");
+                  $checkusername = mysqli_num_rows($checkifusernameexist);
 
-                  echo "<script>location.replace('admin.php')</script>";
+                  if($checkusername)
+                  {
+                    mysqli_query($con, "INSERT INTO users (`username`, `password`, `role`) VALUES ('$username', '$password', 1)");
+
+                    echo "<script>location.replace('admin.php')</script>";
+
+                  }else 
+                  {
+                    echo "<script>alert('Username is already exist')</script>";
+                  }
+
+                
 
               }
             

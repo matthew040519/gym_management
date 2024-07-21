@@ -264,39 +264,51 @@
                   $address = $_POST['address'];
                   $bio = $_POST['bio'];
 
-                  if (move_uploaded_file($_FILES['image']['tmp_name'], $target)){
+                  $checkifusernameexist = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'");
+                    $checkusername = mysqli_num_rows($checkifusernameexist);
 
-                    $queryUsers = mysqli_query($con, "INSERT INTO users (`username`, `password`, `role`) VALUES ('$username', '$password', 2)");
-
-                    if($queryUsers)
+                    if($checkusername)
                     {
-                        $users = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'");
-                        $rowUsers = mysqli_fetch_array($users);
-                        $user_id = $rowUsers["id"];
+                      if (move_uploaded_file($_FILES['image']['tmp_name'], $target)){
+
+                        $queryUsers = mysqli_query($con, "INSERT INTO users (`username`, `password`, `role`) VALUES ('$username', '$password', 2)");
     
-                        mysqli_query($con, "INSERT INTO instructor (`image`, `fullname`, `biography`, `address`, `contact`, `user_id`) VALUES
-                        ('$image', '$fullname', '$bio', '$address', '$contact_number', '$user_id') ");
-
-                        $instructor = mysqli_query($con, "SELECT * FROM instructor WHERE user_id = '$user_id'");
-                        $rowInstructor = mysqli_fetch_array($instructor);
-                        $instructor_id = $rowInstructor['id'];
-
-                        foreach($_POST['skills'] as $skills)
+                        if($queryUsers)
                         {
-                            mysqli_query($con, "INSERT INTO instructor_skills (`instructor_id`, `type_id`) VALUES ('$instructor_id', '$skills')");
+                            $users = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'");
+                            $rowUsers = mysqli_fetch_array($users);
+                            $user_id = $rowUsers["id"];
+        
+                            mysqli_query($con, "INSERT INTO instructor (`image`, `fullname`, `biography`, `address`, `contact`, `user_id`) VALUES
+                            ('$image', '$fullname', '$bio', '$address', '$contact_number', '$user_id') ");
+    
+                            $instructor = mysqli_query($con, "SELECT * FROM instructor WHERE user_id = '$user_id'");
+                            $rowInstructor = mysqli_fetch_array($instructor);
+                            $instructor_id = $rowInstructor['id'];
+    
+                            foreach($_POST['skills'] as $skills)
+                            {
+                                mysqli_query($con, "INSERT INTO instructor_skills (`instructor_id`, `type_id`) VALUES ('$instructor_id', '$skills')");
+                            }
+        
+                            echo "<script>location.replace('instructor.php')</script>";
+                        }
+                        else 
+                        {
+                            echo "<script>alert('Something went wrong!')</script>";
                         }
     
-                        echo "<script>location.replace('instructor.php')</script>";
-                    }
-                    else 
+                      }
+                       
+                      else {
+                        echo "<script>alert('Error in Uploading Files!')</script>";
+                      }
+                    } else 
                     {
-                        echo "<script>alert('Something went wrong!')</script>";
+                      echo "<script>alert('Username is already exist')</script>";
                     }
 
-                  }
-                  else {
-                        echo "<script>alert('Error in Uploading Files!')</script>";
-                  }
+                 
 
               }
             

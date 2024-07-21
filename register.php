@@ -13,17 +13,28 @@
             $sec_question = $_POST['sec_questions'];
             $answer = $_POST['answer'];
 
-            mysqli_query($con, "INSERT INTO users (`username`, `password`, `role`, `sq_id`, `sq_answer`) 
-            VALUES ('$username', '$password', 3, '$sec_question', '$answer')");
+            $checkifusernameexist = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'");
+            $checkusername = mysqli_num_rows($checkifusernameexist);
 
-                  $users = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'");
-                  $rowUsers = mysqli_fetch_array($users);
-                  $user_id = $rowUsers["id"];
+            if($checkusername)
+            {
 
-            mysqli_query($con, "INSERT INTO member (`fullname`, `address`, `contact_number`, `user_id`) 
-            VALUES ('$fullname', '$address', '$contact_number', '$user_id')");
+              mysqli_query($con, "INSERT INTO users (`username`, `password`, `role`, `sq_id`, `sq_answer`) 
+              VALUES ('$username', '$password', 3, '$sec_question', '$answer')");
+  
+                    $users = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'");
+                    $rowUsers = mysqli_fetch_array($users);
+                    $user_id = $rowUsers["id"];
+  
+              mysqli_query($con, "INSERT INTO member (`fullname`, `address`, `contact_number`, `user_id`) 
+              VALUES ('$fullname', '$address', '$contact_number', '$user_id')");
+  
+              echo "<script>alert('Successfully Registered!')</script>";
 
-            echo "<script>alert('Successfully Registered!')</script>";
+            }else 
+            {
+              echo "<script>alert('Username is already exist')</script>";
+            }
           
             
 
