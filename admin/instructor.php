@@ -267,7 +267,7 @@
                   $checkifusernameexist = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'");
                     $checkusername = mysqli_num_rows($checkifusernameexist);
 
-                    if($checkusername)
+                    if($checkusername === 0)
                     {
                       if (move_uploaded_file($_FILES['image']['tmp_name'], $target)){
 
@@ -303,7 +303,8 @@
                       else {
                         echo "<script>alert('Error in Uploading Files!')</script>";
                       }
-                    } else 
+                    } 
+                    else 
                     {
                       echo "<script>alert('Username is already exist')</script>";
                     }

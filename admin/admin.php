@@ -187,7 +187,7 @@
                   $checkifusernameexist = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'");
                   $checkusername = mysqli_num_rows($checkifusernameexist);
 
-                  if($checkusername)
+                  if($checkusername === 0)
                   {
                     mysqli_query($con, "INSERT INTO users (`username`, `password`, `role`) VALUES ('$username', '$password', 1)");
 
