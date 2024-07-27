@@ -109,19 +109,27 @@
                                   <th>Package Name</th>
                                   <th style="text-align: left;">Rate</th>
                                   <th>Duration</th>
+                                  <th></th>
                               </tr>
                           </thead>
                           <tbody>
                               <?php
-                              $query = mysqli_query($con, "SELECT * FROM package");
+                              $query = mysqli_query($con, "SELECT * FROM package WHERE active = 1");
                               while ($row = mysqli_fetch_array($query)) {
                               ?>
                               <tr>
                                   <td><?php echo $row['package_name']; ?></td>
                                   <td style="text-align: left;"><?php echo number_format($row['amount'], 2); ?></td>
                                   <td><?php echo $row['duration']; ?></td>
+                                  <td><a href="#" data-bs-toggle="modal"
+                                data-bs-target="#modalCenter<?php echo $row['id']; ?>" class="btn btn-success btn-sm"><i class='bx bx-edit-alt'></i></a> |
+                                <a href="#" data-bs-toggle="modal"
+                                data-bs-target="#modalCenterdelete<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class='bx bx-no-entry'></i></i></a></td>
                               </tr>
-                              <?php } ?>
+                              <?php 
+                              include('modals/edit_packages.php');
+                              include('modals/delete_packages.php');
+                             } ?>
                           </tbody>
                       </table>
                   </div>
@@ -227,6 +235,24 @@
                   echo "<script>location.replace('packages.php')</script>";
 
               }
+
+
+              if(isset($_POST['update']))
+                        {
+                            $package_id = $_POST['id'];
+                            $package = $_POST['package'];
+                            $rate = $_POST['rate'];
+                            $duration = $_POST['duration'];
+                            $count = $_POST['count'];
+                            $details = $_POST['details'];
+          
+                            $complete_duration = $count.' '.$duration;
+                            $complete_rate = $rate;
+
+                            mysqli_query($con, "UPDATE package SET `package_name` = '$package', `amount` = '$rate', `duration` = '$complete_duration', 
+                            `type` = '$duration', `count` = '$count', `details` = '$details' WHERE `id` = '$package_id'");
+                            echo "<script>location.replace('packages.php')</script>";
+                        }
             
             ?>
 

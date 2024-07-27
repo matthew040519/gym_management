@@ -109,6 +109,7 @@
                                   <th>Title</th>
                                   <th>Contents</th>
                                   <th style="text-align: left;">Date</th>
+                                  <th></th>
                               </tr>
                           </thead>
                           <tbody>
@@ -120,8 +121,15 @@
                                   <td><?php echo $row['title']; ?></td>
                                   <td><?php echo $row['content']; ?></td>
                                   <td style="text-align: left;"><?php echo $row['date']; ?></td>
+                                  <td><a href="#" data-bs-toggle="modal"
+                                data-bs-target="#modalCenter<?php echo $row['id']; ?>" class="btn btn-success btn-sm"><i class='bx bx-edit-alt'></i></a> |
+                                <a href="#" data-bs-toggle="modal"
+                                data-bs-target="#modalCenterdelete<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class='bx bx-no-entry'></i></i></a></td>
                               </tr>
-                              <?php } ?>
+                              <?php 
+                              include('modals/edit_blogs.php');
+                              include('modals/delete_blogs.php');
+                            } ?>
                           </tbody>
                       </table>
                   </div>
@@ -134,7 +142,7 @@
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="modalCenterTitle">Add Products</h5>
+                                <h5 class="modal-title" id="modalCenterTitle">Add Blogs</h5>
                                 <button
                                   type="button"
                                   class="btn-close"

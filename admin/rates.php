@@ -108,6 +108,7 @@
                               <tr>
                                   <th>Type</th>
                                   <th style="text-align: left;">Rate</th>
+                                  <th></th>
                               </tr>
                           </thead>
                           <tbody>
@@ -118,8 +119,12 @@
                               <tr>
                                   <td><?php echo $row['type']; ?></td>
                                   <td style="text-align: left;"><?php echo number_format($row['rate'], 2); ?></td>
+                                  <td><a href="#" data-bs-toggle="modal"
+                                  data-bs-target="#modalCenter<?php echo $row['id']; ?>" class="btn btn-success btn-sm"><i class='bx bx-edit-alt'></i></a></td>
                               </tr>
-                              <?php } ?>
+                              <?php 
+                              include('modals/edit_rate.php');
+                            } ?>
                           </tbody>
                       </table>
                   </div>

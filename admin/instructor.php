@@ -106,6 +106,7 @@
                     <table id="example" class="table table-striped nowrap" style="width:100%">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Fullname</th>
                                 <th>Address</th>
                                 <th style="text-align: left;">Contact</th>
@@ -114,16 +115,23 @@
                         </thead>
                         <tbody>
                             <?php
-                            $query = mysqli_query($con, "SELECT * FROM instructor");
+                            $query = mysqli_query($con, "SELECT * FROM instructor WHERE active = 1");
                             while ($row = mysqli_fetch_array($query)) {
                             ?>
                             <tr>
+                                <td><a href="#" data-bs-toggle="modal"
+                                data-bs-target="#modalCenter<?php echo $row['id']; ?>" class="btn btn-success btn-sm"><i class='bx bx-edit-alt'></i></a> |
+                                <a href="#" data-bs-toggle="modal"
+                                data-bs-target="#modalCenterdelete<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class='bx bx-no-entry'></i></i></a></td>
                                 <td><?php echo $row['fullname']; ?></td>
                                 <td><?php echo $row['address']; ?></td>
                                 <td style="text-align: left;"><?php echo $row['contact']; ?></td>
                                 <td><?php echo $row['biography']; ?></td>
                             </tr>
-                            <?php } ?>
+                            <?php 
+                            include('modals/edit_instructor.php');
+                            include('modals/delete_instructor.php');
+                             } ?>
                         </tbody>
                     </table>
                   </div>
