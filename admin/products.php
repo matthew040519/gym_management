@@ -106,6 +106,7 @@
                         <table id="example" class="table table-striped nowrap" style="width:100%">
                           <thead>
                               <tr>
+                              <th></th>
                                   <th>Product Name</th>
                                   <th>Product Details</th>
                                   <th style="text-align: left;">Price</th>
@@ -117,11 +118,19 @@
                               while ($row = mysqli_fetch_array($query)) {
                               ?>
                               <tr>
+                              <td><a href="#" data-bs-toggle="modal"
+                                data-bs-target="#modalCenter<?php echo $row['id']; ?>" class="btn btn-success btn-sm"><i class='bx bx-edit-alt'></i></a> |
+                                <a href="#" data-bs-toggle="modal"
+                                data-bs-target="#modalCenterdelete<?php echo $row['id']; ?>" class="btn btn-danger btn-sm"><i class='bx bx-no-entry'></i></i></a></td>
                                   <td><?php echo $row['product_name']; ?></td>
                                   <td><?php echo $row['product_details']; ?></td>
                                   <td style="text-align: left;"><?php echo number_format($row['price'], 2); ?></td>
+                                  
                               </tr>
-                              <?php } ?>
+                              <?php 
+                              include('modals/edit_products.php');
+                              include('modals/delete_products.php');
+                             } ?>
                           </tbody>
                       </table>
                   </div>

@@ -114,7 +114,7 @@
                 $id = $_SESSION['member_id'];
                 $query = mysqli_query($con, "SELECT * FROM package 
                 INNER JOIN member_package ON member_package.package_id=package.id
-                WHERE member_package.member_id = $id AND finish = 0");
+                WHERE member_package.member_id = $id AND finish = 0 AND package.active = 1");
                 while($row = mysqli_fetch_array($query)){
                 ?>
                   <div class="col-md-6 col-lg-6 mb-3">
@@ -137,7 +137,7 @@
                 <?php 
                 $query = mysqli_query($con, "SELECT * FROM instructor
                 INNER JOIN member_package ON member_package.instructor_id=instructor.id
-                WHERE member_package.member_id = $id AND finish = 0");
+                WHERE member_package.member_id = $id AND finish = 0 AND package.active = 1");
                 while($row = mysqli_fetch_array($query)){
                 ?>
                   <div class="col-md-6 col-lg-6 mb-3">

@@ -11,14 +11,6 @@
 
             
             $id = $_GET['id'];
-            $user = mysqli_query($con, "SELECT * FROM users
-            WHERE users.id = '$id' and password = MD5('$old_password')");
-            $rowuser = mysqli_fetch_array($user);
-
-            $checkusername = mysqli_num_rows($user);
-
-            if($checkusername > 0)
-            {
                 if($new_password == $new_password)
                 {
                     $queryInsert = mysqli_query($con, "UPDATE users SET `password`= MD5('$new_password') WHERE id = '$id'");
@@ -39,9 +31,6 @@
             } else {
                 echo "<script>alert('Incorrect Old Password!')</script>";
             }
-            
-
-        }
 
 ?>
 <!DOCTYPE html>
@@ -171,17 +160,6 @@
               <p class="mb-4">Security Password</p>
 
               <form id="formAuthentication" class="mb-3" method="POST">
-              <div class="mb-3" style="text-align: left;">
-                  <label for="email" class="form-label">Old Password</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="email"
-                    name="old_password"
-                    placeholder="Enter your Password"
-                    autofocus
-                  />
-                </div>
                 <div class="mb-3" style="text-align: left;">
                   <label for="email" class="form-label">New Password</label>
                   <input

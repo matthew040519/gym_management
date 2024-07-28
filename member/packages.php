@@ -92,7 +92,7 @@
             <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Listing /</span> Package</h4>
               <div class="row mb-5">
                 <?php 
-                $query = mysqli_query($con, "SELECT * FROM package");
+                $query = mysqli_query($con, "SELECT * FROM package WHERE active = 1");
                 while($row = mysqli_fetch_array($query)){
                 ?>
                   <div class="col-md-6 col-lg-3 mb-3">

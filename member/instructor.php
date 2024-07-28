@@ -94,7 +94,7 @@
               <div class="row mb-5">
                 <?php 
                 $package = $_GET['package'];
-                $query = mysqli_query($con, "SELECT * FROM instructor");
+                $query = mysqli_query($con, "SELECT * FROM instructor where active = 1");
                 while($row = mysqli_fetch_array($query)){
                 ?>
                   <div class="col-md-6 col-lg-4 mb-3">

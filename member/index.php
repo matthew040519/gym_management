@@ -119,7 +119,7 @@
                 </div>
               <div class="row mb-5">
                 <?php 
-                $query = mysqli_query($con, "SELECT * FROM package");
+                $query = mysqli_query($con, "SELECT * FROM package where active = 1");
                 while($row = mysqli_fetch_array($query)){
                 ?>
                   <div class="col-md-6 col-lg-3 mb-3">
