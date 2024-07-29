@@ -28,8 +28,6 @@
                 {
                     echo "<script>alert('Password Not Match!')</script>";
                 }
-            } else {
-                echo "<script>alert('Incorrect Old Password!')</script>";
             }
 
 ?>
