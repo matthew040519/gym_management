@@ -3,7 +3,7 @@
  
  $dataPoints = array();
  
- $sales = mysqli_query($con, "SELECT SUM(amount) as totalSales, MONTHNAME(tdate) AS date FROM member_package WHERE status = 1 GROUP BY MONTHNAME(tdate)");
+ $sales = mysqli_query($con, "SELECT SUM(amount) as totalSales, MONTHNAME(tdate) AS date FROM member_package WHERE status = 1 GROUP BY MONTHNAME(tdate), MONTH(tdate) ORDER BY MONTH(tdate) ASC");
  while($rowSales = mysqli_fetch_array($sales)){
     array_push($dataPoints, array("label" => $rowSales['date'], "y" => $rowSales['totalSales']));
  }

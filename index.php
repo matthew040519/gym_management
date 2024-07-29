@@ -58,7 +58,7 @@ https://templatemo.com/tm-548-training-studio
                             <li class="scroll-to-section"><a href="#our-classes">Classes</a></li>
                             <!-- <li class="scroll-to-section"><a href="#schedule">Schedules</a></li> -->
                             <li class="scroll-to-section"><a href="#contact-us">Contact</a></li> 
-                            <li class="main-button"><a href="login.php">Sign Up</a></li>
+                            <li class="main-button"><a href="login.php">Login</a></li>
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -82,7 +82,7 @@ https://templatemo.com/tm-548-training-studio
                 <h6>work harder, get stronger</h6>
                 <h2>easy with our <em>gym</em></h2>
                 <div class="main-button scroll-to-section">
-                    <a href="#features">Become a member</a>
+                    <a href="register.php">Become a member</a>
                 </div>
             </div>
         </div>
