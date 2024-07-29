@@ -55,7 +55,7 @@ https://templatemo.com/tm-548-training-studio
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
                             <li class="scroll-to-section"><a href="#features">About</a></li>
-                            <!-- <li class="scroll-to-section"><a href="#our-classes">Classes</a></li> -->
+                            <li class="scroll-to-section"><a href="#our-classes">Classes</a></li>
                             <!-- <li class="scroll-to-section"><a href="#schedule">Schedules</a></li> -->
                             <li class="scroll-to-section"><a href="#contact-us">Contact</a></li> 
                             <li class="main-button"><a href="login.php">Login</a></li>
@@ -253,14 +253,14 @@ lean, muscular appearance through disciplined training and dietary discipline.</
     <!-- ***** Call to Action End ***** -->
 
     <!-- ***** Our Classes Start ***** -->
-    <!-- <section class="section" id="our-classes">
+    <section class="section" id="our-classes">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading">
                         <h2>Our <em>Classes</em></h2>
                         <img src="front_page/assets/images/line-dec.png" alt="">
-                        <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p>
+                        <!-- <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p> -->
                     </div>
                 </div>
             </div>
@@ -359,7 +359,7 @@ global scale.</p>
               </div>
             </div>
         </div>
-    </section> -->
+    </section>
     <!-- ***** Our Classes End ***** -->
     
     <!-- <section class="section" id="schedule">
