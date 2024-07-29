@@ -110,7 +110,7 @@
                       </ul>
                       <?php
                         $id = $_SESSION['member_id'];
-                        $checkPackage = mysqli_query($con, "SELECT * FROM member_package WHERE member_id = '$id' and finish = 0");
+                        $checkPackage = mysqli_query($con, "SELECT * FROM member_package WHERE member_id = '$id' and `status` != 2 and finish = 0");
                         $rowCheck = mysqli_num_rows($checkPackage);
                         $package_data = mysqli_fetch_array($checkPackage);
                       if($rowCheck > 0) {
