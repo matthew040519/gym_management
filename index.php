@@ -56,7 +56,7 @@ https://templatemo.com/tm-548-training-studio
                             <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
                             <li class="scroll-to-section"><a href="#features">About</a></li>
                             <li class="scroll-to-section"><a href="#our-classes">Classes</a></li>
-                            <li class="scroll-to-section"><a href="#schedule">Schedules</a></li>
+                            <!-- <li class="scroll-to-section"><a href="#schedule">Schedules</a></li> -->
                             <li class="scroll-to-section"><a href="#contact-us">Contact</a></li> 
                             <li class="main-button"><a href="login.php">Sign Up</a></li>
                         </ul>        
@@ -97,7 +97,7 @@ https://templatemo.com/tm-548-training-studio
                     <div class="section-heading">
                         <h2>Choose <em>Program</em></h2>
                         <img src="front_page/assets/images/line-dec.png" alt="waves">
-                        <p>Training Studio is free CSS template for gyms and fitness centers. You are allowed to use this layout for your business website.</p>
+                        <!-- <p>Training Studio is free CSS template for gyms and fitness centers. You are allowed to use this layout for your business website.</p> -->
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -362,7 +362,7 @@ global scale.</p>
     </section>
     <!-- ***** Our Classes End ***** -->
     
-    <section class="section" id="schedule">
+    <!-- <section class="section" id="schedule">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -425,10 +425,10 @@ global scale.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- ***** Testimonials Starts ***** -->
-    <section class="section" id="trainers">
+    <!-- <section class="section" id="trainers">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -496,7 +496,7 @@ global scale.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- ***** Testimonials Ends ***** -->
     
     <!-- ***** Contact Us Area Starts ***** -->
