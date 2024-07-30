@@ -13,7 +13,8 @@
                               <div class="modal-body">
                                 <form method="POST">
                                 <?php
-                                    $package_type = rtrim($row['type'], "s");
+                                    // $package_type = rtrim($row['type'], "s");
+                                    $package_type = $row['type'];
                                     $package_count = $row['count'];
                                     $member_package_id = $row['member_package_id'];
                                     $query2 = mysqli_query($con, "SELECT member_package.id as id, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL $package_count $package_type) AS end_date FROM member_package 

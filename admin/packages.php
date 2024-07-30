@@ -180,7 +180,7 @@
                                                 <label for="emailWithTitle" class="form-label">Duration</label>
                                                 <select id="" name="duration" class="form-control">
                                                     <option value="Week">Week</option>
-                                                    <option value="Months">Months</option>
+                                                    <option value="Month">Months</option>
                                                 </select>
                                             </div>
                                         </div>

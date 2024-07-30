@@ -7,10 +7,9 @@
 
             $username = $_POST['username'];
             $password = md5($_POST['password']);
+            $user_level = $_POST['user_level'];
 
-            
-
-            $user = mysqli_query($con, "SELECT * FROM users WHERE username = '$username' and active = 1");
+            $user = mysqli_query($con, "SELECT * FROM users WHERE username = '$username' and `role` = '$user_level' and active = 1");
             $rowuser = mysqli_fetch_array($user);
 
             $checkusername = mysqli_num_rows($user);
@@ -189,13 +188,16 @@
               <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
               <form id="formAuthentication" class="mb-3" method="POST">
+                <div class="d-flex justify-content-between">
+                  <label for="email">Username</label>
+                </div>
                 <div class="mb-3">
-                  <label for="email" class="form-label">Email or Username</label>
                   <input
                     type="text"
                     class="form-control"
                     id="email"
                     name="username"
+                    required
                     placeholder="Enter your username"
                     autofocus
                   />
@@ -213,10 +215,25 @@
                       id="password"
                       class="form-control"
                       name="password"
+                      required
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
                     />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between">
+                    <label for="email">User Level</label>
+                  </div>
+                  
+                  <div class="input-group input-group-merge">
+                    <select class="form-control" name="user_level" id="" required>
+                      <option value="" selected disabled>Choose...</option>
+                      <option value="1">Admin</option>
+                      <option value="2">Instructor</option>
+                      <option value="3">Member</option>
+                    </select>
                   </div>
                 </div>
                 <div class="mb-3">
