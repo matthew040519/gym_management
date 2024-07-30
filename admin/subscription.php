@@ -110,7 +110,7 @@
                           </thead>
                           <tbody>
                               <?php
-                              $query = mysqli_query($con, "SELECT member_package.id as member_package_id, instructor.fullname as instructor_name, package.type, package.package_name, member.fullname, member_package.amount, package.duration, member_package.MOP FROM member_package 
+                              $query = mysqli_query($con, "SELECT member_package.id as member_package_id, instructor.fullname as instructor_name, package.type, package.package_name, package.count, member.fullname, member_package.amount, package.duration, member_package.MOP FROM member_package 
                               INNER JOIN member ON member.id=member_package.member_id
                               INNER JOIN package ON package.id=member_package.package_id
                               INNER JOIN instructor ON instructor.id=member_package.instructor_id
